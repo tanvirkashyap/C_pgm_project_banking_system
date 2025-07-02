@@ -1,1 +1,66 @@
-hello
+// TRANSACTION FUNCTION:
+void transaction_function()
+{ 
+   int acc_no;
+   again_acc_num:
+   printf("eneter your account number\n");
+   scanf("%d", &acc_no);
+   if(found_account() == 0)    // found_account(), return 1 or 0
+   {
+       printf("the account number is not exist, please recheck\n ");
+       goto again_acc_num;
+   }
+   else
+   {   
+       int balance = give_balance();
+       printf("the availabel balance is : %f\n\n",balance );       // give_balance(), return float;
+       do{ 
+           int amount;
+           int option =-1;
+           printf("select the option to proceed\n");
+           printf("0.EXIT\n1.DEPOSITE\n2.WITHDRAWAL\n");
+           scanf("%d", &option);
+           switch(option)
+           {
+               case 1:
+                        printf("enter the mode of transcation\n");
+                        scanf("%s", mode);  //the mode will be store in the structure of banking data.
+                        printf("eneter the amount: ");
+                        scanf("%d", &amount);
+                        balance += amount;   //balance term will be replaced with correct form later;
+                        update_balance(balance);
+                        add_transaction_to_file();   //adding the info to banking file (add the right parameter inside the function)
+                        break;
+               case 2:
+                        printf("enter the mode of transcation\n");
+                        scanf("%s", mode);  //the mode will be store in the structure of banking data.
+                        again_amount:
+                        printf("eneter the amount: ");
+                        scanf("%d", &amount);
+                        if((balance-500) >= amount && amount>0 )  //checking min balance and avoiding -ve withdrwas
+                        {
+                             balance -= amount;   //balance term will be replaced with correct form later;
+                        update_balance(balance);
+                        add_transaction_to_file();   //adding the info to banking file (add the right parameter inside the function)
+                        }
+                        else
+                        {
+                             printf("the transaction is not possible due to: \n");
+                             printf("insufficient balance or negetive withdrawal\n");
+                             goto again_amount;
+                        }
+                       
+                        break;
+                        
+                       
+               case 0 :
+                        printf("exiting.......");
+                        exit(0);
+               default:
+                            printf("invalid option, please recheck.\n");
+                            break;
+                    
+           }
+        }while(option);
+    }
+}
