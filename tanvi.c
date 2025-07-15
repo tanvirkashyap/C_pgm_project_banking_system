@@ -1,7 +1,7 @@
 void main_menu(){
     int choice;
     while(1){
-    printf("1.Open a new account\n2.Make a transaction\n3.Display month report\n4.Edit account details\n5.Display list\n6. Display Account details\n7. Exit");
+    printf("1.Open a new account\n2.Make a transaction\n3.Display month report\n4.Edit account details\n5.Display list\n6. Display Account details\n7. Exit\n");
     printf("Enter your choice: ");
     scanf("%d", &choice);
     switch(choice){
@@ -11,8 +11,8 @@ void main_menu(){
         case 4: edit_menu(); break;
         case 5: display_list(); break;
         case 6: display_account(); break;
-        case 7: exit(0);
-        default: printf("Invalid input"); return;
+        case 7: return;
+        default: printf("Invalid input"); break;
 
     }
     
@@ -40,7 +40,7 @@ void main_menu(){
     scanf("%d", &account_number);
 
     while (fread(&acc, sizeof(acc), 1, fp)) {
-        if (account.account_number == account_number) {
+        if (acc.account_number == account_number) {
             found = 1;
             printf("Account %d deleted.\n", acc.acc_no);
             // Do not write to temp file → this deletes it
@@ -69,13 +69,13 @@ int choice;
     switch(choice){
         case 1: modify_account(); break;
         case 2: delete_account(); break;
-        case 3: exit(0);
-        default: printf("Invalid input");
+        case 3: return;
+        default: printf("Invalid input"); break;
 
     }
     
 }
-return;
+
 }
 
 void give_balance() {
@@ -83,7 +83,7 @@ void give_balance() {
     int account_number, found = 0;
 
     fp = fopen("accounts.dat", "rb");
-    if (!fp) {
+    if (fp == NULL) {
         printf("Error opening file.\n");
         return;
     }
@@ -105,3 +105,4 @@ void give_balance() {
 
     fclose(fp);
 }
+    
