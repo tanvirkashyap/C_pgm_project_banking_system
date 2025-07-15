@@ -22,7 +22,7 @@ void main_menu(){
     return ;
 }
 
-void delete_account(int account){
+
     void delete_account() {
     FILE *fp, *temp;
     int account_number, found = 0;
@@ -59,7 +59,7 @@ void delete_account(int account){
         printf("Account not found.\n");
 }
 
-}
+
 void edit_menu(){
 int choice;
     while(1){
